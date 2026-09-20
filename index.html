@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#11131d">
+  <meta name="description" content="Soundboard สำหรับควบคุมเสียงประกอบละครและการแสดง">
+  <link rel="stylesheet" href="style.css">
+  <title>Soundboard</title>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar" aria-label="เมนูหลัก">
+      <div class="brand">
+        <span class="brand-label">SOUNDBOARD</span>
+        <strong id="sidebar-title">กำลังโหลด…</strong>
+      </div>
+      <nav class="nav-list">
+        <a href="#soundboard" class="nav-link" data-route="soundboard">Soundboard</a>
+        <a href="#sounds" class="nav-link" data-route="sounds">Sounds</a>
+        <a href="#guide" class="nav-link" data-route="guide">Guide</a>
+      </nav>
+      <p class="sidebar-subtitle" id="sidebar-subtitle"></p>
+    </aside>
+
+    <main class="main-content">
+      <header class="mobile-header">
+        <strong id="mobile-title">SOUNDBOARD</strong>
+        <button id="menu-button" class="menu-button" type="button" aria-controls="sidebar" aria-expanded="false">MENU</button>
+      </header>
+
+      <section class="view" id="view-soundboard" data-view="soundboard">
+        <header class="page-header">
+          <p class="eyebrow">LIVE CONTROL</p>
+          <h1 id="board-title">Soundboard</h1>
+          <p id="board-subtitle" class="page-subtitle"></p>
+        </header>
+        <div class="board-tools">
+          <label class="search-field">
+            <span class="sr-only">ค้นหาเสียง</span>
+            <input id="sound-search" type="search" placeholder="ค้นหาเสียง…" autocomplete="off">
+          </label>
+          <div class="category-filters" id="category-filters" aria-label="กรองตามหมวดหมู่"></div>
+        </div>
+        <div id="soundboard" class="sound-grid" aria-live="polite"></div>
+        <p id="empty-board" class="empty-state" hidden>ไม่พบเสียงที่ตรงกับการค้นหา</p>
+        <div class="control-bar">
+          <label class="volume-control" for="master-volume">
+            <span>ระดับเสียง</span>
+            <input id="master-volume" type="range" min="0" max="1" step="0.01" value="0.85">
+            <output id="volume-value" for="master-volume">85%</output>
+          </label>
+          <button id="stop-all" class="stop-button" type="button">STOP ALL</button>
+        </div>
+      </section>
+
+      <section class="view" id="view-sounds" data-view="sounds" hidden>
+        <header class="page-header compact">
+          <p class="eyebrow">CONFIGURATION CHECK</p>
+          <h1>Sounds</h1>
+          <p class="page-subtitle">รายการนี้อ่านจาก <code>sounds.json</code> โดยตรง</p>
+        </header>
+        <label class="search-field list-search">
+          <span class="sr-only">ค้นหารายการเสียง</span>
+          <input id="list-search" type="search" placeholder="ค้นหารายการเสียง…" autocomplete="off">
+        </label>
+        <div class="sound-list-wrap">
+          <table class="sound-list">
+            <thead><tr><th>ชื่อเสียง</th><th>หมวดหมู่</th><th>Shortcut</th><th>ไฟล์</th></tr></thead>
+            <tbody id="sound-list-body"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="view guide" id="view-guide" data-view="guide" hidden>
+        <header class="page-header compact">
+          <p class="eyebrow">HELP</p>
+          <h1>Guide</h1>
+          <p class="page-subtitle">คู่มือสั้น ๆ สำหรับผู้ควบคุมเสียงและผู้ดูแลโปรเจกต์</p>
+        </header>
+        <article>
+          <h2>เริ่มต้นใช้งาน</h2>
+          <ol><li>เปิดหน้า Soundboard แล้วกด Card เพื่อเล่นเสียง</li><li>ใช้ปุ่ม STOP ALL เพื่อหยุดทุกเสียงพร้อมกัน</li><li>ปรับระดับเสียงด้วยแถบระดับเสียงด้านล่าง</li></ol>
+        </article>
+        <article>
+          <h2>Keyboard Shortcuts</h2>
+          <p>บนคอมพิวเตอร์ กดปุ่มที่แสดงบน Card เพื่อเล่นเสียงได้ทันที สามารถกดเสียงหลายรายการพร้อมกันได้ Shortcut จะไม่ทำงานขณะกำลังพิมพ์ในช่องค้นหา</p>
+        </article>
+        <article>
+          <h2>เพิ่มเสียง</h2>
+          <ol><li>เตรียมไฟล์ MP3 หรือ WAV แล้วใส่ในโฟลเดอร์ <code>sounds/</code></li><li>เปิด <code>sounds.json</code> แล้วเพิ่มข้อมูลเสียงหนึ่งรายการ</li><li>Commit และ Push ขึ้น GitHub จากนั้นรอ GitHub Pages อัปเดต</li></ol>
+          <pre><code>{
+  "id": "door",
+  "name": "เสียงประตูปิด",
+  "file": "sounds/door.mp3",
+  "category": "เอฟเฟกต์",
+  "shortcut": "7"
+}</code></pre>
+        </article>
+        <article>
+          <h2>ลบหรือปรับ Card</h2>
+          <p>ลบไฟล์ออกจาก <code>sounds/</code> และลบรายการนั้นจาก <code>sounds.json</code> หากต้องการเปลี่ยนชื่อ หมวดหมู่ Shortcut หรือไฟล์ ให้แก้เฉพาะค่า <code>name</code>, <code>category</code>, <code>shortcut</code> หรือ <code>file</code> ในไฟล์ JSON</p>
+        </article>
+        <article>
+          <h2>ใช้บนมือถือ</h2>
+          <p>เปิด URL ก่อนเริ่มการแสดง แตะ Card เพื่อเล่นเสียง และใช้ปุ่ม MENU เพื่อเปิดเมนูนำทาง เบราว์เซอร์มือถือบางรุ่นจะอนุญาตเสียงหลังจากผู้ใช้แตะหน้าจอครั้งแรกเท่านั้น</p>
+        </article>
+        <article>
+          <h2>แก้ปัญหาเบื้องต้น</h2>
+          <p>ถ้า Card แสดง FILE NOT FOUND ให้ตรวจสอบชื่อและตำแหน่งไฟล์ใน <code>sounds/</code> ให้ตรงกับ <code>file</code> ใน JSON หากหน้าแจ้งว่าโหลด configuration ไม่ได้ ให้ตรวจสอบ comma, quote และวงเล็บใน <code>sounds.json</code></p>
+        </article>
+      </section>
+      <section id="load-error" class="load-error" hidden role="alert"></section>
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
