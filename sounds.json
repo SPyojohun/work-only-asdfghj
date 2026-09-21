@@ -13,7 +13,7 @@
     { "id": "laugh", "name": "เสียงหัวเราะ", "file": "sounds/laugh.mp3", "category": "เอฟเฟค", "shortcut": "U" },
     { "id": "opening", "name": "วันทองคิดถึงผัว", "file": "sounds/idk.mp3", "category": "เอฟเฟค", "shortcut": "I" },
     { "id": "b", "name": "บางระจัน", "file": "sounds/song1.mp3", "category": "เอฟเฟค", "shortcut": "O" },
-    { "id": "m", "name": "เพลงมวย", "file": "sounds/song2.mp3", "category": "เอฟเฟค", "shortcut": "P" },
+    { "id": "m", "name": "เพลงมวย", "file": "sounds/sound2.mp3", "category": "เอฟเฟค", "shortcut": "P" },
     { "id": "c", "name": "เพลงจีน", "file": "sounds/song3.mp3", "category": "เอฟเฟค", "shortcut": "A" }
   ]
 }
